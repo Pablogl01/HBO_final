@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Video;
+use App\Models\Puntuaciones;
 use App\Models\User;
 use App\Models\Role;
 use App\Http\Requests\StoreUserRequest;
@@ -26,7 +27,12 @@ class UserController extends Controller
     public function profile()
     {
         $user = Auth::user();
-        return view('videos.profile',compact('user'));
+        $puntuaciones = Puntuaciones::where("user_id",Auth::user()->id)->get();
+        $count=count($puntuaciones);
+        for($i=0;$i<$count;$i++){
+            $video[] = Video::where("id",$puntuaciones[$i]->videos_id)->get();
+        }
+        return view('videos.profile',compact('user','video'));
     }
 
     public function password()
@@ -44,6 +50,8 @@ class UserController extends Controller
         }
         return redirect()->route('video.index');
     }
+
+
 
     /**
      * Display a listing of the resource.

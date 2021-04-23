@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Video;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -26,6 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         $videos= Video::all();
-        return view('videos.show',compact('videos'));
+        $user=Auth::user();
+        return view('videos.show',compact('videos','user'));
     }
 }

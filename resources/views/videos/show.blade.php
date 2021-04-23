@@ -11,9 +11,52 @@
                     <video src="{{('storage/'.$video->route)}}" width="150px" height="150px" controls></video>
                     <p>{{$video->desc}}</p>
                     <p>{{$video->cont}}</p>
+                    <!--<form action="{{route('guardar',$video)}}" method="POST">
+                      @csrf
+                      @method('POST')
+                        <input type="hidden" value="{{$video->id}}" name="id">
+                        <input type="submit" value="+" name="Result">
+                    </form>-->
+                    <a class="btn btn-primary"  href="{{route('guardar',$video->id)}}">+</a>
                 </div>
             @endforeach
         <div>
     </div>
+    <style>
+#form {
+  width: 250px;
+  margin: 0 auto;
+  height: 50px;
+}
 
+#form p {
+  text-align: center;
+}
+
+#form label {
+  font-size: 20px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+label {
+  color: grey;
+}
+
+.clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+label:hover,
+label:hover ~ label {
+  color: orange;
+}
+
+input[type="radio"]:checked ~ label {
+  color: orange;
+}
+        </style>
     @endsection

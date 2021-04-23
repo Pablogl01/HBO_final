@@ -17,7 +17,7 @@
             <br/>
             Owner
             <br/>
-            <input class="list-group " list="owner_id" name="owner_id" value="{{$video->user}}">
+            <p>{{$video->user}}</p>
             @foreach($users as $user)
                 <datalist id="owner_id">
                     <option value="{{$user->id}}">{{$user->email}}</option>

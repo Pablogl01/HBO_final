@@ -40,6 +40,7 @@ Route::put('post/{id}', function ($id) {
 Auth::routes();
 
 
+Route::resource('puntuaciones','App\Http\Controllers\PuntuacionesController');
 Route::resource('user','App\Http\Controllers\UserController');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('video','App\Http\Controllers\VideosController');
@@ -48,4 +49,4 @@ Route::get('/subir', [App\Http\Controllers\VideosController::class, 'create'])->
 Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
 Route::get('/password', [App\Http\Controllers\UserController::class, 'password'])->name('password');
 Route::get('/destroy', [App\Http\Controllers\VideosController::class, 'destroy'])->name('destroy');
-
+Route::get('/guardar/{id}', [App\Http\Controllers\PuntuacionesController::class, 'guardar'])->name('guardar');

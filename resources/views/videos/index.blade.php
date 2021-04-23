@@ -14,11 +14,16 @@
                         <p>{{$video->cont}}</p>
                         <div style="display:flex;flex-direction:row;margin-bottom:10px">
                             <a class="btn btn-primary"  href="{{route('video.edit',$video->id)}}">Edit</a>
-                            <a style="margin-left:15px"class="btn btn-primary" href="{{route('video.destroy',$video->id)}}">Delete</a></div>
+                            <form action="{{route('video.destroy',$video->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" style="margin-left:15px" class="btn btn-primary">Delete</button>
+                            </form>
+                        </div>   
                     </div>
                 @endforeach
             <div>
         </div>
-
+        
         @endsection
 

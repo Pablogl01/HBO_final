@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Video;
+use App\Models\Puntuaciones;
 use App\Models\User;
 use App\Models\Role;
 use App\Http\Requests\StoreUserRequest;
@@ -116,5 +117,18 @@ class VideosController extends Controller
                         'route'=>$path
             ]);
         return view('videos.index',compact('videos'));
+    }
+
+    public function guardar(Request $request)
+    {
+        $puntos = Puntuaciones::where("video_id",$request->id)->where("user_id",Auth::user()->id)->get();
+        if($puntos){
+            $puntos->delete();
+        }else{
+            $puntos->create(['videos_id'=>$v_id,
+            'user_id'=>Auth::user()->id,
+            'p_num'=>1]);
+        }
+        return redirect()->route('video.show');
     }
 }

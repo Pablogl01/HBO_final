@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Puntuaciones;
+use App\Models\Video;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class PuntuacionesController extends Controller
 {
@@ -67,7 +71,7 @@ class PuntuacionesController extends Controller
      * @param  \App\Models\Puntuaciones  $puntuaciones
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Puntuaciones $puntuaciones)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -81,5 +85,19 @@ class PuntuacionesController extends Controller
     public function destroy(Puntuaciones $puntuaciones)
     {
         //
+    }
+
+    public function guardar($id)
+    {
+        $video = Video::find($id);
+        $puntos = Puntuaciones::where("videos_id",$video->id)->where("user_id",Auth::user()->id);
+        if(count($puntos->get())!=0){
+            $puntos->delete();
+        }else{
+            Puntuaciones::create(['videos_id'=>$id,
+            'user_id'=>Auth::user()->id,
+            'p_num'=>1]);
+        }
+        return redirect()->route('home');
     }
 }
