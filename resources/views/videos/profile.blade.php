@@ -27,10 +27,8 @@
             <td>{{$v[0]->title}}</td>
         <tr>
 
-        @endif
-        
         @endforeach
-        
+        @endif
         </table>
     </div>
 
