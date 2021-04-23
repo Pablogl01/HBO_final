@@ -18,11 +18,17 @@
     </div>
     <div class="col-lg-12">
         <h1 class="my-4">Videos guardados:</h1>
+        @if($video==null)
+        <p>No hay videos</p>
+        @else
         <table class="table">
         @foreach($video as $v)
         <tr>
             <td>{{$v[0]->title}}</td>
         <tr>
+
+        @endif
+        
         @endforeach
         
         </table>
