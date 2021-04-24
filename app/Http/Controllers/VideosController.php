@@ -100,6 +100,8 @@ class VideosController extends Controller
     public function destroy($id)
     {
         $videos=Video::where('id',$id);
+        $saves=Puntuaciones::where('videos_id',$id);
+        $saves->delete();
         $videos->delete();
         return redirect()->route('edit');
     }
