@@ -32,6 +32,9 @@ class UserController extends Controller
         for($i=0;$i<$count;$i++){
             $video[] = Video::where("id",$puntuaciones[$i]->videos_id)->get();
         }
+        if($count==0){
+            $video=null;
+        }
         return view('videos.profile',compact('user','video'));
     }
 
